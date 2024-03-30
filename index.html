@@ -36,11 +36,7 @@
      </blockquote></div>
    
      <!-- Tombol Kirim Pesan -->
-     <div id="Tombol">
-       <a onClick="sjawab()">
-         <b>💌 Balas</b>
-       </a>
-     </div>
+
      
    </div>
 
@@ -53,12 +49,39 @@
 
 <script type="text/javascript">
     const token = '7084542358:AAGeNn3FyqX-LB-aRxFcGqxn5llIC9U835w';
+    
+    async function tampilkanInput() {
+      const { value: pesan } = await Swal.fire({
+        title: 'Kirim Pesan',
+        input: 'text',
+        inputPlaceholder: 'Masukkan pesan Anda di sini...',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Kirim',
+        cancelButtonText: 'Batal',
+        showLoaderOnConfirm: true,
+        preConfirm: async (pesan) => {
+          // Kirim pesan ke bot Telegram di sini
+          await kirimPesanKeBot(pesan);
+        }
+      });
 
-    async function jawab() {
+      if (pesan) {
+        Swal.fire({
+          title: 'Pesan Terkirim!',
+          text: `Pesan "${pesan}" telah berhasil dikirim.`,
+          icon: 'success'
+        });
+      }
+    }
+	
+    async function jawab(message) {
       await swal.fire('Kirim pesan ke Aku ya 😍');
       
       const chatId = '5597253935'; // ID obrolan atau pengguna yang ingin Anda kirimkan pesan
-      const message = pesanwhatsapp; // Pesan yang ingin Anda kirim
+      const message; // Pesan yang ingin Anda kirim
 
       // Membuat payload untuk dikirim ke API Telegram
       const payload = JSON.stringify({
@@ -127,7 +150,7 @@
                   });
                   
                   katangetik = "<b>Aku cuma mau bilang:</b><br><br><i>im very lucky to have you!</i> aku suka<br>semua tentang kamu, aku suka banget<br>denger suara kamu yang selalu bikin<br>aku tenang, pokoknya aku suka<br>semuanya tentang kamu.<br><br>Tetaplah menjadi tujuanku yaa, jangan<br>menjauh dan jangan pergi";
-                  
+                  katangetik2 = "<div id='Tombol'><a onClick='tampilkanInput()'><b>💌 Balas</b></a></div>"
                  setTimeout(kpemb,200);
             }
 </script>
