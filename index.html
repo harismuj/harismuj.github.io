@@ -50,8 +50,8 @@
 <script type="text/javascript">
     const token = '7084542358:AAGeNn3FyqX-LB-aRxFcGqxn5llIC9U835w';
     
-    async function tampilkanInput() {
-      const { value: pesan } = await Swal.fire({
+      async function jawab() {
+      const pesan = await Swal.fire({
         title: 'Kirim Pesan',
         input: 'text',
         inputPlaceholder: 'Masukkan pesan Anda di sini...',
@@ -64,7 +64,7 @@
         showLoaderOnConfirm: true,
         preConfirm: async (pesan) => {
           // Kirim pesan ke bot Telegram di sini
-          await jawab(pesan);
+          await kirimPesanKeBot(pesan);
         }
       });
 
@@ -76,10 +76,8 @@
         });
       }
     }
-	
-      async function jawab(pesan) {
-      await Swal.fire('Kirim pesan ke Aku ya 😍');
 
+    async function kirimPesanKeBot(pesan) {
       const chatId = '5597253935'; // ID obrolan atau pengguna yang ingin Anda kirimkan pesan
 
       const payload = {
@@ -101,31 +99,6 @@
       } catch (error) {
         console.error('Error:', error);
       }
-    }
-
-      // Kirim permintaan ke API Telegram
-      const response = await new Promise((resolve, reject) => {
-        const req = https.request(options, (res) => {
-          let data = '';
-          res.on('data', (chunk) => {
-            data += chunk;
-          });
-          res.on('end', () => {
-            resolve(data);
-          });
-        });
-
-        // Menangani kesalahan dalam permintaan
-        req.on('error', (error) => {
-          reject(error);
-        });
-
-        // Mengirim payload
-        req.write(payload);
-        req.end();
-      });
-
-      console.log('Response:', response);
     }
 
        async function pertama(){
@@ -152,7 +125,7 @@
                   });
                   
                   katangetik = "<b>Aku cuma mau bilang:</b><br><br><i>Aku beruntung kenal kamu</i> aku suka<br>semua tentang kamu, aku suka banget<br>denger suara kamu yang selalu bikin<br>aku tenang, pokoknya aku suka<br>semuanya tentang kamu.<br><br>Tetaplah menjadi tujuanku yaa, jangan<br>menjauh dan jangan pergi";
-                  katangetik2 = "<a onClick='tampilkanInput()'><b>💌 Balas</b></a>";
+                  katangetik2 = "<a onClick='jawab()'><b>💌 Balas</b></a>";
                  setTimeout(kpemb,200);
             }
 </script>
