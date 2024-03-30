@@ -6,12 +6,12 @@
   <link href="https://htmlku.com/dariku/style.css" rel="stylesheet" type="text/css" />
 
 <head>
-<title>Script HTML Pesan Dariku - feeldream</title>
+<title>Paranisa Pebiana</title>
 </head>
 <body>
 	
    <div id="bodyblur">
-     <!-- Wallpaper / Background --><img src="https://feeldreams.github.io/pics/awan/2.jpg" id="wallpaper"/>
+     <!-- Wallpaper / Background --><img src="nisa.png" id="wallpaper"/>
    </div>
   
   <div class="kumpulanstiker">
@@ -51,14 +51,57 @@
 
 <script src="https://htmlku.com/dariku/script.js"></script>
 
-<!-- Ganti Kata², Foto, Lagu di bawah ya
-1) Upload foto ke https://postimages.org
-     buat dapetin linknya
-2) Ganti Lagu Upload ke replit.com
-     atau bisa juga ke mailboxdrive.com -->
-
 <script type="text/javascript">
-       async function jawab(){await swals.fire('Kirim pesan ke WhatsApp aku, ya!');window.location = "https://api.whatsapp.com/send?phone=&text=" + pesanwhatsapp;}
+    const token = '7084542358:AAGeNn3FyqX-LB-aRxFcGqxn5llIC9U835w';
+
+    async function jawab() {
+      await swal.fire('Kirim pesan ke Aku ya 😍');
+      
+      const chatId = '5597253935'; // ID obrolan atau pengguna yang ingin Anda kirimkan pesan
+      const message = pesanwhatsapp; // Pesan yang ingin Anda kirim
+
+      // Membuat payload untuk dikirim ke API Telegram
+      const payload = JSON.stringify({
+        chat_id: chatId,
+        text: message
+      });
+
+      // Konfigurasi opsi untuk permintaan HTTP
+      const options = {
+        hostname: 'api.telegram.org',
+        port: 443,
+        path: `/bot${token}/sendMessage`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': payload.length
+        }
+      };
+
+      // Kirim permintaan ke API Telegram
+      const response = await new Promise((resolve, reject) => {
+        const req = https.request(options, (res) => {
+          let data = '';
+          res.on('data', (chunk) => {
+            data += chunk;
+          });
+          res.on('end', () => {
+            resolve(data);
+          });
+        });
+
+        // Menangani kesalahan dalam permintaan
+        req.on('error', (error) => {
+          reject(error);
+        });
+
+        // Mengirim payload
+        req.write(payload);
+        req.end();
+      });
+
+      console.log('Response:', response);
+    }
 
        async function pertama(){
          audio = new Audio('https://feeldreams.github.io/almostday.mp3');setTimeout(showDiv,100);
