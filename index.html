@@ -77,16 +77,16 @@
       }
     }
 	
-    async function jawab(message) {
+    async function jawab(pesanku) {
       await swal.fire('Kirim pesan ke Aku ya 😍');
       
       const chatId = '5597253935'; // ID obrolan atau pengguna yang ingin Anda kirimkan pesan
-      const message; // Pesan yang ingin Anda kirim
+      const pesanku; // Pesan yang ingin Anda kirim
 
       // Membuat payload untuk dikirim ke API Telegram
       const payload = JSON.stringify({
         chat_id: chatId,
-        text: message
+        text: pesanku
       });
 
       // Konfigurasi opsi untuk permintaan HTTP
